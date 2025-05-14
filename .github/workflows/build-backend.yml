@@ -1,4 +1,4 @@
-name: SonarQube-Backend
+name: KochHeld2 :: Backend
 on:
   push:
     branches:
