@@ -28,17 +28,19 @@ public class AiRecipeController {
     @GetMapping("/search")
     AiRecipe SearchByIngredient(@RequestParam String ingredient) throws JsonProcessingException{
 
-            String request = "Create a simple recipe based on the ingredient: " + ingredient + ". " +
-                    "Respond ONLY with a valid JSON object like this format:  " +
-                    "{\\\"title\\\": \\\"...\\\", \\\"ingredients\\\": [\\\"...\\\"], \\\"description\\\": \\\"...\\\" }. " +
-                    "The parameter names should in English, but the contents should written in German. Do not include any explanation or formatting, only raw JSON.";
-                    //"Please return recipes in the following format:" +
-                    //"\nDish name: \nRequired ingredients: \nPreparation method: ";
-            ChatgptResponse response = restClient.post()
-                    .body(new ChatgptRequest(request))
-                    .retrieve()
-                    .body(ChatgptResponse.class);
-        System.out.println("GPT response: " + response.text());
-            return objectMapper.readValue(response.text(), AiRecipe.class);
+        String request = "Create a simple recipe based on the ingredient: " + ingredient + ". " +
+                "Respond ONLY with a valid JSON object like this format:  " +
+                "{\\\"title\\\": \\\"...\\\", \\\"ingredients\\\": [\\\"...\\\"], \\\"description\\\": \\\"...\\\" }. " +
+                "The parameter names should in English, but the contents should written in German. Do not include any explanation or formatting, only raw JSON.";
+
+        ChatgptResponse response = restClient.post()
+                .body(new ChatgptRequest(request))
+                .retrieve()
+                .body(ChatgptResponse.class);
+
+        if (response == null || response.text() == null) {
+            throw new IllegalStateException("Empty GPT response");
+        }
+        return objectMapper.readValue(response.text(), AiRecipe.class);
     }
 }
