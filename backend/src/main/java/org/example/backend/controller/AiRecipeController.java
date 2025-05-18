@@ -22,16 +22,6 @@ public class AiRecipeController {
         this.restClient = restClient;
         this.objectMapper = objectMapper;   }
 
-    @Configuration
-    public class AppConfig {
-        @Bean
-        public RestClient restClient(@Value("${OpenAi_API_Key}") String openAiApiKey) {
-            return RestClient.builder()
-                    .baseUrl("https://api.openai.com/v1/chat/completions")
-                    .defaultHeader("Authorization", "Bearer " + openAiApiKey)
-                    .build();
-        }
-    }
 
     @GetMapping("/search")
     public AiRecipe searchByIngredient(@RequestParam String ingredient) throws JsonProcessingException {
