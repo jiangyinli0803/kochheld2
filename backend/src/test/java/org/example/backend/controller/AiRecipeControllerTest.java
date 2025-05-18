@@ -4,12 +4,16 @@ import org.example.backend.model.chatgpt.AiRecipe;
 import org.example.backend.model.chatgpt.ChatgptRequest;
 import org.example.backend.model.chatgpt.ChatgptResponse;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.client.RestClient;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@SpringBootTest
+@TestPropertySource(properties ="OpenAi_API_Key=123")
 class AiRecipeControllerTest {
 
     @Test
