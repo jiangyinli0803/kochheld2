@@ -5,8 +5,8 @@ import java.util.List;
 
 public record ChatgptRequest(
         String model,
-        List<ChatGPTRequestMessage> messages
+        List<ChatgptRequestMessage> messages
 ) {
     public ChatgptRequest(String message) {
-        this("gpt-4o-mini", Collections.singletonList(new ChatGPTRequestMessage("user", message)));
+        this("gpt-4o-mini", Collections.singletonList(new ChatgptRequestMessage("user", message)));
 }}

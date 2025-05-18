@@ -5,28 +5,36 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.backend.model.chatgpt.AiRecipe;
 import org.example.backend.model.chatgpt.ChatgptRequest;
 import org.example.backend.model.chatgpt.ChatgptResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClient;
+
 
 @RestController
 @RequestMapping("api/recipe")
 public class AiRecipeController {
     private final RestClient restClient;
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
-    public AiRecipeController(@Value("${OpenAi_API_Key}") String openAiApiKey) {
+    public AiRecipeController(RestClient restClient, ObjectMapper objectMapper) {
+        this.restClient = restClient;
+        this.objectMapper = objectMapper;   }
 
-        this.restClient = RestClient.builder()
-                .baseUrl("https://api.openai.com/v1/chat/completions")
-                .defaultHeader("Authorization", "Bearer " + openAiApiKey)
-                .build();
+    @Configuration
+    public class AppConfig {
+        @Bean
+        public RestClient restClient(@Value("${OpenAi_API_Key}") String openAiApiKey) {
+            return RestClient.builder()
+                    .baseUrl("https://api.openai.com/v1/chat/completions")
+                    .defaultHeader("Authorization", "Bearer " + openAiApiKey)
+                    .build();
+        }
     }
 
     @GetMapping("/search")
-    AiRecipe SearchByIngredient(@RequestParam String ingredient) throws JsonProcessingException{
+    public AiRecipe searchByIngredient(@RequestParam String ingredient) throws JsonProcessingException {
 
         String request = "Create a simple recipe based on the ingredient: " + ingredient + ". " +
                 "Respond ONLY with a valid JSON object like this format:  " +

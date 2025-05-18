@@ -1,5 +1,5 @@
 package org.example.backend.model.chatgpt;
 
-public record ChatGPTRequestMessage(String role,
+public record ChatgptRequestMessage(String role,
                                     String content) {
 }
