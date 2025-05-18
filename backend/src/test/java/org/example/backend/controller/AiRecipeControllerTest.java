@@ -12,8 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
-@TestPropertySource(properties ="OpenAi_API_Key=123")
+@SpringBootTest(properties="OpenAi_API_Key=123")
 class AiRecipeControllerTest {
 
     @Test
