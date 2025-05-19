@@ -14,7 +14,7 @@ function App() {
         <Routes>
             <Route path={"/"} element={
                 <h1>Home Page</h1>}/>
-            <Route path={"/search"} element={<SearchBar/>}/>
+            <Route path={"/aisearch"} element={<SearchBar/>}/>
 
         </Routes>
       </>

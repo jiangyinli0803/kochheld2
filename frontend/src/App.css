@@ -50,7 +50,7 @@
 
 .search-form {
   display: flex;
-  border: 1px solid #ddd;
+  border: 1px solid #3B4D17;
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -65,7 +65,7 @@
 }
 
 .search-button {
-  background: #4285f4;
+  background: #3B4D17;
   border: none;
   padding: 0 16px;
   cursor: pointer;
@@ -92,12 +92,12 @@
 
 .navi li{
   list-style: none;
-  border: 2px solid #00a3e0;
-  background-color: #00a3e0;
+  border: 2px solid #3B4D17;
+  background-color: white;
   padding: 10px;
   border-radius:10px;
   margin: 10px;
 }
 .navi li:hover{
-  background-color: #114969;
+  background-color: #3B4D17 ;
 }
